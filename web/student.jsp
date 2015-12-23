@@ -14,9 +14,13 @@
     <title>学生界面</title>
 </head>
 <body>
-dajiahaoasdas!
+<div align="center">
+欢迎你   <%=request.getSession().getAttribute("username")%>
+
 <br>
-<a href="goalserach.jsp"> <input type="button" name="serach" value="查询分数"><br/></a>
+<a href="goalsearch.jsp"> <input type="button" name="serach" value="查询分数" class="btn btn-info"></a>
 <a href="test.jsp"> <input type="button" name="test" value="进入考试"></a>
+    <form action="/loginoutServlet" method="post"><input type="submit" value="注销"></form>
+</div>
 </body>
 </html>

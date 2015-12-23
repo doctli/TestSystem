@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.ResultSet;
+import java.util.regex.Pattern;
 
 /**
  * Created by doctli on 2015/12/5.
@@ -14,6 +15,7 @@ import java.sql.ResultSet;
 @WebServlet(urlPatterns = {"/loginServlet"},name = "loginServlet")
 public class loginServlet extends HttpServlet {
     String username = null;
+    String userpass = null;
     String sql;
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request,response);
@@ -27,7 +29,11 @@ public class loginServlet extends HttpServlet {
                     teacherlogin(request,response);
                     break;
                 case "student":
-                    studentlogin(request,response);
+                    try {
+                        studentlogin(request,response);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     break;
                 default:
                     break;
@@ -35,21 +41,37 @@ public class loginServlet extends HttpServlet {
 
         }
     }
-    private void studentlogin(HttpServletRequest request, HttpServletResponse response){
-        sql = "select * from testmanage.student where student_no='" + request.getParameter("userno") + "';";
-        try {
-            ResultSet rs = (new DB().search(sql));
-            while (rs.next()) {
-                username = rs.getString("student_name");
+    private void studentlogin(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        String no=request.getParameter("userno");
+        String password=request.getParameter("password");
+        if(isInteger(no)) {
+            sql = "select * from testsystem.studentinfo where Sno='" + no + "';";
+            try {
+
+                ResultSet rs = (new DB().search(sql));
+                while (rs.next()) {
+                    username = rs.getString("name");
+                    userpass=rs.getString(4);
+                }
+                if (!username.equals(null)&&password.equals(userpass)) {
+                    request.getSession().setAttribute("userno", request.getParameter("userno"));
+                    request.getSession().setAttribute("username", username);
+                    response.sendRedirect("student.jsp");
+                } else {
+                    System.err.println("username.equals(null)" + username);
+                    try {
+                        response.sendRedirect("error.jsp");
+                    }
+                    catch (Exception e){}
+                }
+            } catch (Exception e) {
             }
-            if (!username.equals(null)) {
-                request.getSession().setAttribute("userno", request.getParameter("userno"));
-                request.getSession().setAttribute("username", username);
-                response.sendRedirect("student.jsp");
-            } else {
-                System.err.println("username.equals(null)" + username);
+        }
+        else {
+            try {
+                response.sendRedirect("error.jsp");
             }
-        } catch (Exception e) {
+            catch (Exception e){}
         }
     }
     private void teacherlogin(HttpServletRequest request, HttpServletResponse response){
@@ -58,20 +80,18 @@ public class loginServlet extends HttpServlet {
             try {
                 response.sendRedirect("teacher.jsp");
             }
-            catch (Exception e){
-
-            }
-
+            catch (Exception e){}
         }
         else {
-
             try {
                 response.sendRedirect("error.jsp");
             }
-            catch (Exception e){
-
-            }
+            catch (Exception e){}
         }
 
+    }
+    public static boolean isInteger(String str) {                                  //判断一个字符串是否为数字
+        Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");
+        return pattern.matcher(str).matches();
     }
 }

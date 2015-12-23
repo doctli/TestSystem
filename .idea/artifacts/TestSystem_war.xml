@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="TestSystem:war">
+    <output-path>$PROJECT_DIR$/out/artifacts/TestSystem_war</output-path>
+    <root id="archive" name="TestSystem_war.war">
+      <element id="artifact" artifact-name="TestSystem:war exploded" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$PROJECT_DIR$/lib/mysql-jdbc.jar" />
+          <element id="library" level="project" name="servlet-api" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

@@ -6,6 +6,10 @@
         <element id="directory" name="classes">
           <element id="module-output" name="TestSystem" />
         </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$PROJECT_DIR$/lib/mysql-jdbc.jar" />
+          <element id="library" level="project" name="servlet-api" />
+        </element>
       </element>
       <element id="javaee-facet-resources" facet="TestSystem/web/Web" />
     </root>

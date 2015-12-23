@@ -1,6 +1,3 @@
-<%@ page import="javax.swing.*" %>
-<%@ page import="cn.DB" %>
-<%@ page import="java.sql.ResultSet" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html >
@@ -10,13 +7,13 @@
 </head>
 
 
-<body style=" width:100%; " background="/image/bg.jpg">
+<body style=" width:100%;height: 100% ;background-size: 100%;overflow: hidden" background="/image/bg.jpg">
 
 <form action="/loginServlet" method="get">
 <div style="width:600px; margin:0 auto;margin-top:150px; height:300px; background-image:url(image/bg1.png); border-radius:10px;">
     <center>
         <div style="height:75px; line-height:75px; color:#069; font-weight:bolder; font-size:24px">
-            用户名：<input type="text" name="userno" value="" style="height:24px"></div>
+            用户名：<input type="text" name="userno" value="" style="height:24px" ></div>
         <div style="height:75px; line-height:75px; color:#069; font-weight:bolder; font-size:24px">
             密&nbsp;码：<input type="text" name="password" value="" style="height:24px"></div>
         <div style="height:75px; line-height:75px; color:#069; font-weight:bolder; font-size:24px">
@@ -38,6 +35,6 @@
     </div>
 </div>
 </form>
-<a href="student.jsp">xues</a>
+<%System.out.print("");%>
 </body>
 </html>
