@@ -1,0 +1,36 @@
+12-23
+题号是varchar类型  排序会出现  1，10，2，3，4。。。。。问题?
+                                    mysql为我们提供了两个类型转换函数：CAST和CONVERT，现成的东西我们怎能放过？
+                                    CAST() 和CONVERT() 函数可用来获取一个类型的值，并产生另一个类型的值。
+                                    这个类型 可以是以下值其中的 一个：
+                                    BINARY[(N)]
+                                    CHAR[(N)]
+                                    DATE
+                                    DATETIME
+                                    DECIMAL
+                                    SIGNED [INTEGER]
+                                    TIME
+                                    UNSIGNED [INTEGER]
+
+                                    所以我们也可以用CAST解决问题：
+                                    select server_id from cardserver where game_id = 1 order by CAST(server_id as SIGNED) desc limit 10
+
+                                    也可以使用CONVERT来搞定此问题：
+                                    select server_id from cardserver where game_id = 1 order by CONVERT(server_id,SIGNED) desc limit 10
+
+update testsystem.testpaper set Qno='01' where Qno='1'	Error Code: 1175. You are using safe update mode and you tried to update a table without a WHERE that uses a KEY column To disable safe mode, toggle the option in Preferences -> SQL Editor and reconnect.
+                                    这是因为MySql运行在safe-updates模式下，该模式会导致非主键条件下无法执行update或者delete命令，执行命令SET SQL_SAFE_UPDATES = 0;修改下数据库模式
+
+题目type为select judege fill ，要转换为单选题 判断题 填空题
+                                    在形成表格时转换————表格会太复杂
+                                    使用监听器来转换字符————也复杂
+                                    最后改变字符串1为01  2为02 ……
+
+
+批改试卷  教师从数据库中获取自己所教科目的学生答卷   按学生来 前一个学生后一个学生
+统计          从数据库中获取该门的学生-成绩  ——————如何导出到Excel??
+
+
+
+
+

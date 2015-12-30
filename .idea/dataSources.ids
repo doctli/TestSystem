@@ -166,7 +166,7 @@ subject</columns>
         <mandatory>1</mandatory>
         <data-type>varchar(2)</data-type>
       </column>
-      <column id="42" parent="7" name="quostion">
+      <column id="42" parent="7" name="question">
         <mandatory>1</mandatory>
         <data-type>text</data-type>
       </column>

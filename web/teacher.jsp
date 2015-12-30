@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<input type="button" name="pigai" value="批改试卷"><br/>
+<a href="answerjudege.jsp"> <input type="button" name="pigai" value="批改试卷"></a>
+<br/>
 <input type="button" name="tongji" value="统计成绩">
 </body>
 </html>

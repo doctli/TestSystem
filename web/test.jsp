@@ -30,10 +30,12 @@
                 <tr>
                     <td><%=rs2.getString("subject")%></td>
                     <td><%=rs2.getString("Wno")%></td>
-                    <td><form action="/teststart.jsp"><input type="hidden" name="hidden" value=<%=rs2.getString("Pno")%>><input type="submit" value="考试" ></form></td>
+                    <td><form action="/teststart.jsp" method="post"><input type="hidden" name="hidden" value=<%=rs2.getString("Pno")%>><input type="submit" value="考试" ></form></td>
                 </tr>
             <%}%>
     </tbody>
 </table>
+<br>
+<a href="student.jsp"><input type="button" value="返回"></a>
 </body>
 </html>
