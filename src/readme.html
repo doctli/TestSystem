@@ -31,6 +31,14 @@ update testsystem.testpaper set Qno='01' where Qno='1'	Error Code: 1175. You are
 统计          从数据库中获取该门的学生-成绩  ——————如何导出到Excel??
 
 
+1/4中文乱码解决
+                    response.setCharacterEncoding("utf-8");
+                    request.setCharacterEncoding("utf-8");
+
+
+1/5
+试卷批改页面
+从教师页面获取要批改的试卷号，找出作答学生学号存入线性表，循环提取每个学生的作答情况 并将批改分数存入数据库
 
 
 

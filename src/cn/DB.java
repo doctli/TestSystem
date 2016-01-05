@@ -13,7 +13,7 @@ public class DB {
     private Statement statement;
     private ResultSet resultSet;
     private String classname="com.mysql.jdbc.Driver";
-    private String url="jdbc:mysql://localhost/testsystem";
+    private String url="jdbc:mysql://localhost/synthesispractice";
     public DB(){}
     public Connection getConnection(){//建立连接
         try{

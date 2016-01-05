@@ -15,6 +15,8 @@
 <jsp:useBean id="teststart" class="cn.DB"></jsp:useBean>
 <%
     response.setContentType("text/html;charset=UTF-8");
+    response.setCharacterEncoding("utf-8");
+    request.setCharacterEncoding("utf-8");
     String Pno=request.getParameter("hidden");
     String sql="SELECT * FROM testsystem.testpaper where Pno='"+Pno+"' order by Qno;";
     ResultSet rs=teststart.search(sql);
@@ -38,7 +40,7 @@
             <td><%=rs.getString("Qno")%></td>
             <td><%=rs.getString("question")%></td>
             <td><%=rs.getString("type")%></td>
-            <td><input type="text" name="<%=rs.getString("Qno")%>" ></td>
+            <td><input type="text" name=<%=rs.getString("Qno")%> ></td>
         </tr>
         <%}%>
         </tbody>

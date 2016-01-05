@@ -24,9 +24,15 @@ public class loginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getParameter("userno") != (null)) {
             String identity=request.getParameter("identity");
+            System.err.println(request.getParameter("userno")+request.getParameter("password")+request.getParameter("identity"));
             switch (identity){
                 case "teacher":
-                    teacherlogin(request,response);
+                    try {
+                        System.err.print("跳转到教师登录模块");
+                        teacherlogin(request,response);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case "student":
                     try {
@@ -36,6 +42,7 @@ public class loginServlet extends HttpServlet {
                     }
                     break;
                 default:
+                    System.err.print("什么地方也没去");
                     break;
             }
 
@@ -75,20 +82,38 @@ public class loginServlet extends HttpServlet {
         }
     }
     private void teacherlogin(HttpServletRequest request, HttpServletResponse response){
-        if(request.getParameter("userno").equals("teacher01")&&request.getParameter("password").equals("123")){
-            request.getSession().setAttribute("username", "教师");
+        System.out.println("进入教师模块");
+        String no=request.getParameter("userno");
+        String password=request.getParameter("password");
+        System.out.println("获取到工号密码"+no+password);
+        if(true) {
+            sql = "select * from testsystem.teacherinfo where Wno='" + no + "';";
+            System.err.print(sql);
             try {
-                response.sendRedirect("teacher.jsp");
+                ResultSet rs = (new DB().search(sql));
+                while (rs.next()) {
+                    username = rs.getString("name");
+                    System.err.print(username);
+                    userpass = rs.getString("passwd");
+                    System.err.print(userpass);
+                }
+                if(!username.equals(null)&&password.equals(userpass)){
+                    System.err.print("教师登录成功");
+                    request.getSession().setAttribute("userno", request.getParameter("userno"));
+                    request.getSession().setAttribute("username", username);
+                    String sqlt= "select * from testsystem.teachlist where Wno='" + no + "';";
+                    ResultSet rst = (new DB().search(sqlt));
+                    while (rst.next()) {
+                        request.getSession().setAttribute("subject", rst.getString("subject"));
+                    }
+                    response.sendRedirect("teacher.jsp");
+                }
+                else {
+                    response.sendRedirect("error.jsp");
+                }
             }
-            catch (Exception e){}
+            catch(Exception e){}
         }
-        else {
-            try {
-                response.sendRedirect("error.jsp");
-            }
-            catch (Exception e){}
-        }
-
     }
     public static boolean isInteger(String str) {                                  //判断一个字符串是否为数字
         Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");

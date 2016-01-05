@@ -15,7 +15,7 @@
         <div style="height:75px; line-height:75px; color:#069; font-weight:bolder; font-size:24px">
             用户名：<input type="text" name="userno" value="" style="height:24px" ></div>
         <div style="height:75px; line-height:75px; color:#069; font-weight:bolder; font-size:24px">
-            密&nbsp;码：<input type="text" name="password" value="" style="height:24px"></div>
+            密&nbsp;码：<input type="password" name="password" value="" style="height:24px"></div>
         <div style="height:75px; line-height:75px; color:#069; font-weight:bolder; font-size:24px">
             &nbsp;<input type="radio" name="identity" style="width:20px; height:20px" value="teacher">教师&nbsp;
             &nbsp;<input type="radio" value="student" name="identity" checked=checked style="width:20px; height:20px">学生</div>

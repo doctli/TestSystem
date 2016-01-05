@@ -8,28 +8,24 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by doctli on 2015/12/24.
+ * Created by doctli on 2016/1/5.
  */
-@WebServlet(name = "testsubmitServlet",urlPatterns = {"/testsubmitServlet"})
-public class testsubmitServlet extends HttpServlet {
+@WebServlet(name = "judegesubmitServlet",urlPatterns = {"/judegesubmitServlet"})
+public class judegesubmitServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        response.setCharacterEncoding("utf-8");
-        request.setCharacterEncoding("utf-8");
         String Sno=request.getParameter("Sno");
-        String Pno=request.getParameter("Pno");
+        String Pno=request.getParameter("Pnojudege");
         String sql=null;
         String[] Qnum={"01","02","03","04","05","06","07","08","09","10"};
         DB db=new DB();
         for(int i=0;i<Qnum.length;i++){
-            sql="insert into testsystem.answer values ('"+Sno+"','"+Pno+"','"+Qnum[i]+"','"+request.getParameter(Qnum[i])+"',null);";
-            db.update(sql);
+            sql="insert into testsystem.answer(Sno,Pno,Qno,score) values ('"+Sno+"','"+Pno+"','"+Qnum[i]+"','"+request.getParameter(Qnum[i])+"');";
+            //db.update(sql);
             System.out.println(sql);
         }
-        response.sendRedirect("student.jsp");
     }
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request,response);
+        
     }
 }

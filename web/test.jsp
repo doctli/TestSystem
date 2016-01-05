@@ -15,6 +15,29 @@
     String sql="select * from testsystem.testpaperinfo where class=(select class from testsystem.studentinfo where Sno='"+sno+"') AND subject not in  (SELECT subject from testsystem.courseschedule where Sno='"+sno+"');";
     try {rs2=test.search(sql);}catch (Exception e){}
     %>
+<%!
+    public String teacherchange(String a){
+        String name=null;
+        switch (a){
+            case "t02":
+                name="追风";
+                break;
+            case "t03":
+                name="夺命";
+                break;
+            case "t04":
+                name="铁手";
+                break;
+            case "teacher01":
+                name="徐老师";
+                break;
+           default:
+               name=a;
+                break;
+    }
+        return name;
+    }
+%>
 考试科目:
 <br/>
 <table>
@@ -29,7 +52,7 @@
         <%while (rs2.next()){%>
                 <tr>
                     <td><%=rs2.getString("subject")%></td>
-                    <td><%=rs2.getString("Wno")%></td>
+                    <td><%=teacherchange(rs2.getString("Wno"))%></td>
                     <td><form action="/teststart.jsp" method="post"><input type="hidden" name="hidden" value=<%=rs2.getString("Pno")%>><input type="submit" value="考试" ></form></td>
                 </tr>
             <%}%>
